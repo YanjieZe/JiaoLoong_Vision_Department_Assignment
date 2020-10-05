@@ -7,7 +7,7 @@
 1. 车牌区域识别以及提取</br>
 代码效果：使用**边缘检测以及轮廓提取算法**将原图中的车牌提取，并用**透视变换**做出正视图。</br>
 **车牌位置检测**结果如下图。</br>
-![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1/carplateFind.jpg)
+![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1/carplateFind.jpg)</br>
 **透视变换**结果如下图。</br>
 ![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1/plateFinnal.jpg)
 2. 找出苹果</br>
