@@ -1,7 +1,7 @@
 # JiaoLoong_Vision_Department_Assignment
 
 ## Assignment1 2020.10.05
-包含代码：</br>
+!包含代码：</br>
 1. 车牌区域识别以及提取</br>
 代码效果：使用**边缘检测以及轮廓提取算法**将原图中的车牌提取，并用**透视变换**做出正视图。结果如下图。</br>
 (https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1/plateFinnal.jpg)
