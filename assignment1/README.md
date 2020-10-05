@@ -1,2 +1,4 @@
 # The First Assignment 2020.10.4
-The task is to find the contour of the **apple**.
+The first task is to find the contour of the **apple**.
+<br>
+The second task is to extract the car **plate**.
