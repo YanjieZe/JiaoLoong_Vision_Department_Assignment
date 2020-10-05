@@ -1,5 +1,7 @@
 # JiaoLoong_Vision_Department_Assignment
 
+##### 迮炎杰 YanjieZe
+
 ## Assignment1 2020.10.05
 包含代码：</br>
 1. 车牌区域识别以及提取</br>
