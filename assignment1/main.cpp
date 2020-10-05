@@ -11,24 +11,105 @@ int main() {
         std::string srcpath = "../car.jpg";
         cv::Mat src = cv::imread(srcpath);
 
-
         cv::Mat gray;
         cv::cvtColor(src, gray, cv::COLOR_BGR2GRAY);
-        cv::blur(gray, gray, cv::Size(5, 5));
+        cv::GaussianBlur(gray, gray, cv::Size(5, 5),15);
 
-        cv::Mat sobelImg;
-        cv::Sobel(gray, sobelImg, CV_8U, 1, 0, 3, 1, 0);
+        cv::Mat sobelx,sobely,sobelImg;
+        cv::Sobel(gray,sobelx,CV_8U,1,0,3,1,1);
+        cv::convertScaleAbs(sobelx,sobelx,3);
+        cv::Sobel(gray,sobely,CV_8U,0,1,3,1,1);
+        cv::convertScaleAbs(sobely,sobely,3);
+        cv::addWeighted(sobelx,0.6,sobely,0.5,0,sobelImg);
 
-        cv::Mat thresImg;
-        cv::threshold(sobelImg, thresImg, 0, 255, cv::THRESH_OTSU + cv::THRESH_BINARY);
+
         cv::Mat kernel = cv::getStructuringElement(cv::MORPH_RECT, cv::Size(17, 3));
-        cv::morphologyEx(thresImg, thresImg, cv::MORPH_CLOSE, kernel);
+        cv::morphologyEx(sobelImg, sobelImg, cv::MORPH_CLOSE, kernel);
+
+        cv::threshold(sobelImg, sobelImg, 100, 255, cv::THRESH_BINARY);
 
         std::vector<std::vector<cv::Point>> contours;
-        cv::findContours(thresImg, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);
+        cv::findContours(sobelImg, contours, cv::RETR_EXTERNAL, cv::CHAIN_APPROX_NONE);
+
+        std::vector<std::vector<cv::Point>>::iterator it = contours.begin();
+        //初步面积筛选
+        for (; it != contours.end();)
+        {
+            double Area = contourArea(*it);
+            if (Area < 6000 || Area > 7000)
+            {
+                it = contours.erase(it);
+            }
+            else
+            {
+                ++it;
+                std::cout<<"Area:"<<Area<<std::endl;
+            }
+        }
+
+        cv::RotatedRect box=cv::minAreaRect(contours[0]);
+        cv::Point2f points[4];
+        box.points(points);
+        cv::Mat source = src.clone();
+        for (int i = 0; i < 4; i++)
+        {
+            line(src, points[i], points[(i + 1) % 4], cv::Scalar(255, 255, 0), 3);
+            std::cout<<"the "<<i<<" point:"<<points[i]<<std::endl;
+        }
+//        cv::drawContours(src,contours,-1,cv::Scalar(0,255,0),3);
 
 
-        pictureShow("car", thresImg);
+//        pictureShow("process", sobelImg);
+//        pictureShow("car",src);
+//        cv::imwrite("../carplateFind.jpg",src);
+
+
+
+        // cut the region of the plate
+        cv::Mat plate;
+        float x1,x2,y1,y2,width,height;
+        x1 = points[1].x;
+        x2 = points[3].x;
+        y1 = points[1].y;
+        y2 = points[3].y;
+        width = x2 - x1;
+        height = y2 - y1;
+
+        cv::Rect2f square(x1,y1,width,height);
+        plate = source(square);
+        pictureShow("plate",plate);
+//        cv::imwrite("../plateCut.jpg",plate);
+
+//        cv::Point2f center;
+//        center.x = (x2-x1)/2;
+//        center.y = (y2-y1)/2;
+
+        std::cout<<"Plate's size:"<<plate.size<<std::endl;
+
+        //transform the plate
+        cv::Mat plateAffined;
+        cv::Point2f p0[4],p1[4];
+        p0[0].x=0,p0[0].y=0;
+        p0[1].x=5,p0[1].y=52;
+        p0[2].x=161,p0[2].y=0;
+        p0[3].x=171,p0[3].y=52;
+
+        p1[0].x=0,p1[0].y=0;
+        p1[1].x=0,p1[1].y=52;
+        p1[2].x=171,p1[2].y=0;
+        p1[3].x=171,p1[3].y=52;
+
+        cv::Mat m=cv::getPerspectiveTransform(p0,p1);
+        cv::warpPerspective(plate,plateAffined,m,cv::Size(172,50));
+        std::cout<<"PlateAffined's size:"<<plateAffined.size<<std::endl;
+
+        pictureShow("Affined",plateAffined);
+
+        cv::Mat plateGray;
+        cv::cvtColor(plateAffined,plateGray,cv::COLOR_BGR2GRAY);
+        cv::threshold(plateGray,plateGray,125,255,cv::THRESH_BINARY);
+        pictureShow("plateGray",plateGray);
+        cv::imwrite("../plateFinnal.jpg",plateGray);
     }
 
     if(applejudge==1)

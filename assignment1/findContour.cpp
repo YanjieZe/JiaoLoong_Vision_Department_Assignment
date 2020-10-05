@@ -28,3 +28,4 @@ std::vector<std::vector<cv::Point>> mergeContours(std::vector<std::vector<cv::Po
     }
     return allContours;
 }
+
