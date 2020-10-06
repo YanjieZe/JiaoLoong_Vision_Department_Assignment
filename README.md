@@ -16,3 +16,6 @@
 代码效果：使用**边缘检测算法以及轮廓提取算法**将苹果位置画出来，由于苹果阴影部分较难区分，使用椭圆拟合圈出了苹果的大概位置。</br>
 结果如下图。</br>
 ![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1/appleFind.jpg)
+
+## Assignment1.3 2020.10.06
+![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/chessCorners.jpg)
