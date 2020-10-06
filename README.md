@@ -34,3 +34,9 @@
 
 [-0.4338629777541601, 0.2967710571102112, -0.0004557785585483899, -0.0002240604911029394, -0.1410073068885603]
 ```
+最后，使用**Matlab**的相机标定软件进行了相机标定，并将相机参数保存于**Assignment1.3**中的[cameraParameters.mat](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/cameraParameters.mat),估计误差保存在**Assignment1.3**中的[estimationErrors.mat](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/estimationErrors.mat)。</br>
+使用Matlab进行相机标定效果如下图。
+![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/matlabCalibrator.png)
+
+## 以上为第一次作业全部内容。
+
