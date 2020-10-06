@@ -22,4 +22,16 @@
 1.3 利用chess图片进行相机标定。</br>
 角点显示图片如下。
 ![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/chessCorners.jpg)
-相机标定的具体结果见**Assignment1.3**中的[**calibration_result_right.txt](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/calibration_result_right.txt)。
+相机标定的具体结果见**Assignment1.3**中的[calibration_result_right.txt](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/calibration_result_right.txt)。
+具体参数如下：
+```
+相机内参数矩阵：
+
+[913.1838519635979, 0, 642.675229085825;
+ 0, 766.0147575172565, 365.0250373802296;
+ 0, 0, 1]
+
+畸变系数：
+
+[-0.4338629777541601, 0.2967710571102112, -0.0004557785585483899, -0.0002240604911029394, -0.1410073068885603]
+```
