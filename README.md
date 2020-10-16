@@ -38,5 +38,40 @@
 使用Matlab进行相机标定效果如下图。
 ![image](https://github.com/YanjieZe/JiaoLoong_Vision_Department_Assignment/blob/main/assignment1.3/matlabCalibrator.png)
 
-## 以上为第一次作业全部内容。
+## Assignment2 2020.10.16
+
+### 题目一（相机模型&坐标变换）
+假设当前图像中有一个像素点，其像素坐标是:$\begin{pmatrix}u\\v\\1 \end{pmatrix} $
+
+设相机内参矩阵为 $K$ 且忽略畸变;
+
+该像素对应3d点在相机坐标系下的z坐标为$d$；
+
+当前图像对应陀螺仪数据为$R_{ir}$；
+
+陀螺仪坐标系和相机坐标系之间的旋转矩阵为$R_{ci}$，平移向量为$t_{ci}$；
+
+其中$e_r$为陀螺仪参考坐标系，$e_i$为陀螺仪坐标系；$e_c$为相机坐标系。
+
+求该像素点对应的3d点在$e_r$内的坐标t
+
+
+
+### $$Solution:$$
+
+$$d\begin{pmatrix}u\\v\\1 \end{pmatrix}=\begin{pmatrix}K& \vec 0\end{pmatrix}\begin{pmatrix} X_c\\Y_c\\Z_c\\1 \end{pmatrix}$$
+
+$$格式：(3*1) = (3*4)*(4*1)$$ 
+
+
+
+$$\begin{pmatrix} X_c\\Y_c\\Z_c\\1 \end{pmatrix}=\begin{pmatrix} R_{ci}&t_{ci}\\ \vec 0 &1\end{pmatrix}\begin{pmatrix} X_r\\Y_r\\Z_r\\1\end{pmatrix}$$
+
+$$格式：(4*1)=(4*4)*(4*1)$$
+
+
+
+$$Hence:$$
+
+$$d\begin{pmatrix}u\\v\\1 \end{pmatrix}=\begin{pmatrix}K& \vec 0\end{pmatrix}\begin{pmatrix} R_{ci}&t_{ci}\\ \vec 0 &1\end{pmatrix}\begin{pmatrix} X_r\\Y_r\\Z_r\\1\end{pmatrix} =\begin{pmatrix}KR_{ci}, Kt_{ci}\end{pmatrix}\begin{pmatrix} X_r\\Y_r\\Z_r\\1\end{pmatrix} $$
 
